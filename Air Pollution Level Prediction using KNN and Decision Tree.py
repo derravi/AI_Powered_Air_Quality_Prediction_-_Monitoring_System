@@ -1,5 +1,3 @@
-#Import the Librarys
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,9 +8,10 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, accuracy_score, mean_squared_error, mean_absolute_error,confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
 from imblearn.over_sampling import SMOTE
+import pickle
 
 # Load the Dataset
-df = pd.read_csv("city_day.csv")
+df = pd.read_csv("csv file/city_day.csv")
 df.head()
 
 print(f"Total Columns of this dataset is {df.shape[1]} and the Total Row is {df.shape[0]}.")
@@ -62,7 +61,6 @@ for i in df.columns:
         temp3.append(i)
     else:
         temp2.append(i)
-
 
 # Check and visualize outliers
 print("Lets Check the Outliers of all Columns.\n")
@@ -194,6 +192,19 @@ def UserInput():
 
 
 UserInput()
+
+#Make the Pickle Model
+print("Lets Make the Pickle Model for the Fast Api.......\n")
+
+models = {"Ordinal_city_encoder":city_encoder,
+          "label_encoder":lb_iqr,
+          "standard_scaler":std,
+          "knn_model":knn,
+          "dtree_model":dtree   
+}
+    
+with open('model/all_models.pkl','wb') as f:
+    pickle.dump(models,f)
 
 
 #Correlation Heatmap
