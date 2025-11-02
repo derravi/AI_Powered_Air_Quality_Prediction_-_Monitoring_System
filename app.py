@@ -48,7 +48,7 @@ def predict_air_pollution(data: UserInput):
     #scale down all the data
 
     new_df = std.transform(df)
-
+    
     #make Prediction using the ML Models
 
     knn_pred = knn.predict(new_df)[0]
